@@ -1,4 +1,11 @@
-# meto
+<p align="center">
+    <img src="doc/meto.png" width="100" height="100">
+    <br>
+    <b>METO</b>
+    <br>
+</p>
+
+
 ### Чтобы использовать данный проект, используйте автоматический установщик.
 
 Пример работы с installer.go
