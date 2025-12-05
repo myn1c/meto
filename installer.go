@@ -32,16 +32,7 @@ func main() {
 	reader := bufio.NewReader(os.Stdin)
 
 	fmt.Println("Это автоматический настройщик клиентской части meto")
-
-	SSID := prompt(reader, "Введите название сети ESP: ")
-	PASS := prompt(reader, "Введите пароль от сети: ")
-	PORT := promptDefault(reader, "Введите порт (по умолчанию 8080): ", "8080")
-	HOST := promptDefault(reader, "Введите IP host (по умолчанию локальный IP пк в сети): ", getLocalIP())
-
-	fmt.Println("\nНазвание сети:", SSID)
-	fmt.Println("Пароль:", PASS)
-	fmt.Println("Порт:", PORT)
-	fmt.Println("Хост:", HOST)
+	SSID, PASS, PORT, HOST := input()
 
 	clientURL := "https://raw.githubusercontent.com/myn1c/meto/main/src/client_esp32.py"
 	clientFile := "client_esp32.py"
@@ -100,6 +91,41 @@ func main() {
 	}
 
 	fmt.Println("Инсталлер завершил свою работу")
+}
+
+func input() (string, string, string, string) {
+	reader := bufio.NewReader(os.Stdin)
+
+	SSID := prompt(reader, "Введите название сети ESP: ")
+	PASS := prompt(reader, "Введите пароль от сети: ")
+	PORT := promptDefault(reader, "Введите порт (по умолчанию 8080): ", "8080")
+	HOST := promptDefault(reader, "Введите IP host (по умолчанию локальный IP пк в сети): ", getLocalIP())
+
+	for {
+		fmt.Println("\nТекущие настройки:")
+		fmt.Println("1. Название сети (SSID):", SSID)
+		fmt.Println("2. Пароль (PASS):", PASS)
+		fmt.Println("3. Порт (PORT):", PORT)
+		fmt.Println("4. Хост (HOST):", HOST)
+		fmt.Println("5. Всё верно, продолжить")
+
+		choice := prompt(reader, "Введите номер переменной, которую хотите изменить (или 5 для продолжения): ")
+
+		switch choice {
+		case "1":
+			SSID = prompt(reader, "Введите новое название сети ESP: ")
+		case "2":
+			PASS = prompt(reader, "Введите новый пароль: ")
+		case "3":
+			PORT = promptDefault(reader, "Введите новый порт: ", PORT)
+		case "4":
+			HOST = promptDefault(reader, "Введите новый хост: ", HOST)
+		case "5":
+			return SSID, PASS, PORT, HOST
+		default:
+			fmt.Println("Некорректный выбор, попробуйте ещё раз.")
+		}
+	}
 }
 
 func prompt(reader *bufio.Reader, text string) string {
