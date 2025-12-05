@@ -36,17 +36,14 @@ func main() {
 	SSID := prompt(reader, "Введите название сети ESP: ")
 	PASS := prompt(reader, "Введите пароль от сети: ")
 	PORT := promptDefault(reader, "Введите порт (по умолчанию 8080): ", "8080")
-	HOST := prompt(reader, "Введите IP host (или Auto для локального IP): ")
-	if strings.ToLower(HOST) == "auto" || HOST == "" {
-		HOST = getLocalIP()
-	}
+	HOST := promptDefault(reader, "Введите IP host (по умолчанию локальный IP пк в сети): ", getLocalIP())
 
 	fmt.Println("\nНазвание сети:", SSID)
 	fmt.Println("Пароль:", PASS)
 	fmt.Println("Порт:", PORT)
 	fmt.Println("Хост:", HOST)
 
-	clientURL := "https://raw.githubusercontent.com/myn1c/meto/main/client_esp32.py"
+	clientURL := "https://raw.githubusercontent.com/myn1c/meto/main/src/client_esp32.py"
 	clientFile := "client_esp32.py"
 
 	fmt.Println("Скачиваем клиентский файл:", clientURL)
@@ -100,6 +97,7 @@ func main() {
 			fmt.Println("Ошибка при запуске сервера:", err)
 		}
 	}
+	fmt.Println("Инсталлер завершил свою работу")
 }
 
 func prompt(reader *bufio.Reader, text string) string {
@@ -143,6 +141,10 @@ func httpGetText(url string) (string, error) {
 	}
 	defer resp.Body.Close()
 
+	if resp.StatusCode != 200 {
+		return "", fmt.Errorf("Ошибка %d: файл не найден по URL %s", resp.StatusCode, url)
+	}
+
 	data, err := io.ReadAll(resp.Body)
 	return string(data), err
 }
@@ -173,7 +175,7 @@ func getGitHubReleases() []Release {
 			fmt.Println("Чтобы продолжить, нужно ввести Personal Access Token (PAT).")
 			fmt.Println("Инструкция:")
 			fmt.Println("1. Зайди на https://github.com/settings/tokens")
-			fmt.Println("2. Developer settings -> Personal access tokens -> Tokens (classic) -> Generate new token")
+			fmt.Println("2. Developer settings → Personal access tokens → Tokens (classic) → Generate new token")
 			fmt.Println("3. Для чтения релизов публичных репозиториев достаточно любого токена")
 			fmt.Print("Введите токен: ")
 
@@ -261,6 +263,11 @@ func downloadFile(path, url string) {
 	}
 	defer resp.Body.Close()
 
+	if resp.StatusCode != 200 {
+		fmt.Printf("Ошибка: сервер вернул %d при попытке скачать %s\n", resp.StatusCode, url)
+		return
+	}
+
 	out, err := os.Create(path)
 	if err != nil {
 		fmt.Println("Ошибка создания файла:", err)
@@ -270,5 +277,7 @@ func downloadFile(path, url string) {
 
 	if _, err := io.Copy(out, resp.Body); err != nil {
 		fmt.Println("Ошибка записи в файл:", err)
+	} else {
+		fmt.Println("Сервер сохранён:", path)
 	}
 }
