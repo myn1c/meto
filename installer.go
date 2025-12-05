@@ -87,7 +87,6 @@ func main() {
 		serverFile := selected.Asset.Name
 		fmt.Println("Скачиваем", serverFile)
 		downloadFile(serverFile, selected.Asset.URL)
-		fmt.Println("Сервер сохранён:", serverFile)
 
 		run := prompt(reader, "Запустить сервер? (y/n): ")
 		if strings.ToLower(run) == "y" {
