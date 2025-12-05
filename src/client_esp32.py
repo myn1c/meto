@@ -5,11 +5,13 @@ import ujson
 from machine import Pin
 import dht
 
+"""
 SSID = "%s"
 PASS = "%s"
 
 API_HOST = "%s"
 API_PORT = %s
+"""
 
 wifi = network.WLAN(network.STA_IF)
 wifi.active(True)
