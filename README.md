@@ -38,17 +38,33 @@
 Пароль: Password
 Порт: 8080
 Хост: 169.254.142.85
+Скачиваем клиентский файл: https://raw.githubusercontent.com/myn1c/meto/main/client_esp32.py
 Файл client_esp32.py успешно создан!
 
 Получаем список релизов сервера с GitHub...
+Превышен лимит запросов к GitHub.
+Чтобы продолжить, нужно ввести Personal Access Token (PAT).
+Инструкция:
+1. Зайди на https://github.com/settings/tokens
+2. Developer settings → Personal access tokens → Tokens (classic) → Generate new token
+3. Для чтения релизов публичных репозиториев достаточно любого токена
+Введите токен: g#p#DOALP0#jK#R####Sjx#n##bX9##b3##8yp7
 Найденные серверные релизы:
 [1] windows
 [2] kubuntu
 Выберите номер релиза для скачивания: 1
-Скачиваем server.exe
-Сервер сохранён: server.exe
+Скачиваем server-Windows.exe
+Сервер сохранён: server-Windows.exe
 Запустить сервер? (y/n): y
-Убедились, что client_esp32.py на месте - запускаем server.exe
+[GIN-debug] [WARNING] Creating an Engine instance with the Logger and Recovery middleware already attached.
+
+[GIN-debug] [WARNING] Running in "debug" mode. Switch to "release" mode in production.
+ - using env:	export GIN_MODE=release
+ - using code:	gin.SetMode(gin.ReleaseMode)
+
+[GIN-debug] GET    /                         --> main.main.func1 (3 handlers)
+[GIN-debug] GET    /ws                       --> main.main.func2 (3 handlers)
+[GIN-debug] GET    /data                     --> main.main.func3 (3 handlers)
 ````
 
 ---
