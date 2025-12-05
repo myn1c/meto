@@ -60,43 +60,46 @@ func main() {
 		return
 	}
 	fmt.Println("Файл", clientFile, "успешно создан!")
-
-	fmt.Println("\nПолучаем список релизов сервера с GitHub...")
-	releases := getGitHubReleases()
-	servers := findServerReleases(releases)
-	if len(servers) == 0 {
-		fmt.Println("Релизов с сервером не найдено")
-		return
-	}
-
-	fmt.Println("Найденные серверные релизы:")
-	for i, s := range servers {
-		fmt.Printf("[%d] %s\n", i+1, s.OSName)
-	}
-
-	choice := prompt(reader, "Выберите номер релиза для скачивания: ")
-	index := 0
-	fmt.Sscanf(choice, "%d", &index)
-	if index < 1 || index > len(servers) {
-		fmt.Println("Некорректный выбор")
-		return
-	}
-
-	selected := servers[index-1]
-	serverFile := selected.Asset.Name
-	fmt.Println("Скачиваем", serverFile)
-	downloadFile(serverFile, selected.Asset.URL)
-	fmt.Println("Сервер сохранён:", serverFile)
-
-	run := prompt(reader, "Запустить сервер? (y/n): ")
+	run := prompt(reader, "Скачать сервер? (y/n): ")
 	if strings.ToLower(run) == "y" {
-		cmd := exec.Command("./" + serverFile)
-		cmd.Stdout = os.Stdout
-		cmd.Stderr = os.Stderr
-		if err := cmd.Run(); err != nil {
-			fmt.Println("Ошибка при запуске сервера:", err)
+		fmt.Println("\nПолучаем список релизов сервера с GitHub...")
+		releases := getGitHubReleases()
+		servers := findServerReleases(releases)
+		if len(servers) == 0 {
+			fmt.Println("Релизов с сервером не найдено")
+			return
+		}
+
+		fmt.Println("Найденные серверные релизы:")
+		for i, s := range servers {
+			fmt.Printf("[%d] %s\n", i+1, s.OSName)
+		}
+
+		choice := prompt(reader, "Выберите номер релиза для скачивания: ")
+		index := 0
+		fmt.Sscanf(choice, "%d", &index)
+		if index < 1 || index > len(servers) {
+			fmt.Println("Некорректный выбор")
+			return
+		}
+
+		selected := servers[index-1]
+		serverFile := selected.Asset.Name
+		fmt.Println("Скачиваем", serverFile)
+		downloadFile(serverFile, selected.Asset.URL)
+		fmt.Println("Сервер сохранён:", serverFile)
+
+		run := prompt(reader, "Запустить сервер? (y/n): ")
+		if strings.ToLower(run) == "y" {
+			cmd := exec.Command("./" + serverFile)
+			cmd.Stdout = os.Stdout
+			cmd.Stderr = os.Stderr
+			if err := cmd.Run(); err != nil {
+				fmt.Println("Ошибка при запуске сервера:", err)
+			}
 		}
 	}
+
 	fmt.Println("Инсталлер завершил свою работу")
 }
 
