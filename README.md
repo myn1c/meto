@@ -43,6 +43,15 @@
 Скачать сервер? (y/n): y
 
 Получаем список релизов сервера с GitHub...
+
+Превышен лимит запросов к GitHub.
+Чтобы продолжить, нужно ввести Personal Access Token (PAT).
+Инструкция:
+1. Зайди на https://github.com/settings/tokens
+2. Developer settings → Personal access tokens → Tokens (classic) → Generate new token
+3. Для чтения релизов публичных репозиториев достаточно любого токена
+Введите токен: g#p#DOALP0#jK#R####Sjx#n##bX9##b3##8yp7
+
 Найденные серверные релизы:
 [1] windows
 [2] kubuntu
