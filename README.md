@@ -25,30 +25,24 @@
 
 ## Автоматический установщик
 
-Пример работы с `installer.go`:
+Пример работы `installer.go`:
 
 ```text
 Это автоматический настройщик клиентской части meto
 Введите название сети ESP: Ufanet
 Введите пароль от сети: Password
 Введите порт (по умолчанию 8080): 
-Введите IP host (или Auto для локального IP): Auto
+Введите IP host (по умолчанию локальный IP пк в сети): 
 
 Название сети: Ufanet
 Пароль: Password
 Порт: 8080
 Хост: 169.254.142.85
-Скачиваем клиентский файл: https://raw.githubusercontent.com/myn1c/meto/main/client_esp32.py
+Скачиваем клиентский файл: https://raw.githubusercontent.com/myn1c/meto/main/src/client_esp32.py
 Файл client_esp32.py успешно создан!
+Скачать сервер? (y/n): y
 
 Получаем список релизов сервера с GitHub...
-Превышен лимит запросов к GitHub.
-Чтобы продолжить, нужно ввести Personal Access Token (PAT).
-Инструкция:
-1. Зайди на https://github.com/settings/tokens
-2. Developer settings → Personal access tokens → Tokens (classic) → Generate new token
-3. Для чтения релизов публичных репозиториев достаточно любого токена
-Введите токен: g#p#DOALP0#jK#R####Sjx#n##bX9##b3##8yp7
 Найденные серверные релизы:
 [1] windows
 [2] kubuntu
