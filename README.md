@@ -58,7 +58,7 @@ METO - это готовая клиент‑серверная система д
 5. Всё верно, продолжить
 Введите номер переменной, которую хотите изменить (или 5 для продолжения): 5
 
-Скачиваем клиентский файл: https://raw.githubusercontent.com/myn1c/meto/main/src/client_esp32.py
+Скачиваем клиентский файл: https://raw.githubusercontent.com/onlyteal/meto/main/src/client_esp32.py
 Файл client_esp32.py успешно создан!
 Скачать сервер? (y/n): y
 
