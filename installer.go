@@ -31,10 +31,10 @@ type ServerRelease struct {
 func main() {
 	reader := bufio.NewReader(os.Stdin)
 
-	fmt.Println("Это автоматический настройщик клиентской части meto")
+	fmt.Println("Это автоматический генератор клиентского ПО meto")
 	SSID, PASS, PORT, HOST := input()
 
-	clientURL := "https://raw.githubusercontent.com/myn1c/meto/main/src/client_esp32.py"
+	clientURL := "https://raw.githubusercontent.com/onlyteal/meto/main/src/client_esp32.py"
 	clientFile := "client_esp32.py"
 
 	fmt.Println("Скачиваем клиентский файл:", clientURL)
@@ -190,7 +190,7 @@ API_PORT = %s
 }
 
 func getGitHubReleases() []Release {
-	url := "https://api.github.com/repos/myn1c/meto/releases"
+	url := "https://api.github.com/repos/onlyteal/meto/releases"
 	for {
 		token := os.Getenv("GITHUB_TOKEN")
 		releases, err := fetchReleases(url, token)
