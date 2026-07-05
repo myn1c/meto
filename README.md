@@ -1,5 +1,5 @@
 <p align="center">
-    <img src="doc/meto.png" width="100" height="100">
+    <img src="assets/meto.png" width="100" height="100">
     <br>
     <b>METO</b>
     <br>
@@ -35,7 +35,7 @@ METO - это готовая клиент‑серверная система д
 
 ## Установка
 
-Скачайте [установщик](https://github.com/myn1c/meto/releases/tag/installer) или проект.
+Скачайте [установщик](https://github.com/onlyteal/meto/releases/tag/installer) или проект.
 
 ---
 
@@ -142,7 +142,7 @@ print("IP:", get_local_ip())
 Сайт будет выглядеть примерно так по пути `/`:
 
 <p align="center">
-    <img src="doc/Metoсайта.jpeg" alt="Скрин сайта" width="400">
+    <img src="assets/Metoсайта.jpeg" alt="Скрин сайта" width="400">
 </p>
 
 ---
